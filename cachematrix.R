@@ -4,7 +4,7 @@
 ## Last Revision Comment:
 ## Description:
 ## The first function, makeCacheMatrix creates a special "matrix" 
-##which is really a list containing a function to
+## which is really a list containing a function to
 ##1.set the value of the matrix
 ##2.get the value of the matrix
 ##3.set the value of the inverse of the matrix
@@ -38,14 +38,14 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
   
-  
-  m <- x$getinv()
-  if(!is.null(m) & identical(x, x$get())) {
+  p <-  as.data.frame(x)
+  m <- p$getinv()
+  if(!is.null(m) & identical(as.matrix(p, nrow=2, ncol=2), p$get())) {
     message("getting cached data")
     return(m)
   }
-  data <- x$get()
+  data <- p$get()
   m <- solve(data)
-  x$setinv(m)
+  p$setinv(m)
   m
 }
